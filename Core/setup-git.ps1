@@ -27,7 +27,7 @@
 #>
 
 # SETUP GIT
-# powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/setup-git.ps1' -OutFile '$env:TEMP\machine-wide-VSCode.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\setup-git.ps1'"
+# powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/setup-git.ps1' -OutFile '$env:TEMP\setup-git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\setup-git.ps1'"
 
 # Check if Git is installed
 $gitPath = Get-Command git -ErrorAction SilentlyContinue
