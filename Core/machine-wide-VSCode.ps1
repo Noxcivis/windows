@@ -14,7 +14,7 @@ The script performs the following actions:
 
 .NOTES
 - Author : Noxcivis
-- Revision : 1.1
+- Revision : 1.0
 - Source : https://github.com/Noxcivis
 - The script must be run from an elevated PowerShell prompt (Run as Administrator).
 - The script uses the latest stable version of Visual Studio Code.
