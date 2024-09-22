@@ -33,7 +33,7 @@
 $gitPath = Get-Command git -ErrorAction SilentlyContinue
 
 if ($gitPath) {
-    Write-Host "Git is installed at $($gitPath.Path)"
+    Write-Host "Git is installed at $($gitPath.Path)" -ForegroundColor Green
     
     # Prompt for user name and email
     $gitUserName = Read-Host "Enter your Git user name"
@@ -43,11 +43,14 @@ if ($gitPath) {
     git config --global user.name "$gitUserName"
     git config --global user.email "$gitUserEmail"
     
-    Write-Host "Git global configuration updated successfully."
+    Write-Host "Git global configuration updated successfully." -ForegroundColor Green
     
     # Output the current Git global configuration
-    Write-Host "Current Git global configuration:"
+    Write-Host "Current Git global configuration:" -ForegroundColor Green
     git config --global --list
 } else {
-    Write-Host "Git is not installed. Please install Git and try again."
+    Write-Host ""
+    Write-Host "Git is not installed. Please install Git and try again." -ForegroundColor Red
+    Write-Host "If you have Git installed, ensure that the Git executable is in the system PATH.  A reboot may be required after installing Git." -ForegroundColor Yellow
+    Write-Host ""
 }
