@@ -28,16 +28,30 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/N
 
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
     Write-Host "You do not have Administrator rights to run this script. Please re-run this script as an Administrator." -ForegroundColor Red
+
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
+
+    # Exit the PowerShell session
     exit
+
 }
 
 # Check if Visual Studio Code is already installed
 if (Get-Command "code" -ErrorAction SilentlyContinue) {
+
     Write-Host ""
     Write-Host "Visual Studio Code is already installed." -ForegroundColor Green
     Write-Host ""
+
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
+
+    # Exit the PowerShell session
     exit
+    
 }
 
 # Define the URL for the VSCode installer

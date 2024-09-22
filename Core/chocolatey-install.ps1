@@ -26,17 +26,32 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/N
 
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
     Write-Host "You do not have Administrator rights to run this script. Please re-run this script as an Administrator." -ForegroundColor Red
+
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
+
+    # Exit the PowerShell session
     exit
+
 }
 
 # Check if Chocolatey is installed
 if (Get-Command choco -ErrorAction SilentlyContinue) {
+
     Write-Host ""
     Write-Host "Chocolatey is already installed." -ForegroundColor Green
     Write-Host ""
+
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
+
+    # Exit the PowerShell session
     exit
+
 } else {
+
     # Set the execution policy to allow the script to run
     Set-ExecutionPolicy Bypass -Scope Process -Force
 
@@ -55,4 +70,5 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
 
     # Exit the PowerShell session
     exit
+    
 }

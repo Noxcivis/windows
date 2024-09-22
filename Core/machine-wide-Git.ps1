@@ -23,18 +23,35 @@ The script performs the following actions:
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/blob/main/Core/machine-wide-Git.ps1' -OutFile '$env:TEMP\machine-wide-Git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-Git.ps1'"
 #>
 
+# DOWNLOAD AND INSTALL FROM AN ADMIN POWERSHELL PROMPT
+# powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/machine-wide-Git.ps1' -OutFile '$env:TEMP\machine-wide-Git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-Git.ps1'"
+
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+   
     Write-Host "You do not have Administrator rights to run this script. Please re-run this script as an Administrator." -ForegroundColor Red
+    
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
+
+    # Exit the PowerShell session
     exit
+
 }
 
 # Check if Git is already installed
 if (Get-Command "git" -ErrorAction SilentlyContinue) {
+    
     Write-Host ""
     Write-Host "Git is already installed." -ForegroundColor Green
     Write-Host ""
+    
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
+
+    # Exit the PowerShell session
     exit
+
 }
 
 # Define the Git version and URL for the installer
