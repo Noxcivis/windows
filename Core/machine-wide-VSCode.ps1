@@ -1,3 +1,30 @@
+<#
+.SYNOPSIS
+This script downloads and installs Visual Studio Code for all users on a Windows machine.
+
+.DESCRIPTION
+The script performs the following actions:
+1. Checks if the script is running with administrative privileges.
+2. Defines the URL for the Visual Studio Code installer.
+3. Defines the path where the installer will be downloaded.
+4. Downloads the Visual Studio Code installer.
+5. Installs Visual Studio Code for all users silently.
+6. Removes the installer after installation.
+
+.NOTES
+- Author : Noxcivis
+- Revision : 1.0
+- Source : https://github.com/Noxcivis
+- The script must be run from an elevated PowerShell prompt (Run as Administrator).
+- The script uses the latest stable version of Visual Studio Code.
+
+.EXAMPLE
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/machine-wide-VSCode.ps1' -OutFile '$env:TEMP\machine-wide-VSCode.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-VSCode.ps1'"
+#>
+
+# DOWNLOAD AND INSTALL FROM AN ADMIN POWERSHELL PROMPT
+# powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/machine-wide-VSCode.ps1' -OutFile '$env:TEMP\machine-wide-VSCode.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-VSCode.ps1'"
+
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Warning "You do not have Administrator rights to run this script. Please re-run this script as an Administrator."
