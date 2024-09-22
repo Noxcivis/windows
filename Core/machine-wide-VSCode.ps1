@@ -45,3 +45,11 @@ Start-Process -FilePath $installerPath -ArgumentList "/verysilent", "/allusers",
 
 # Remove the installer after installation
 Remove-Item -Path $installerPath
+
+Write-Host "Visual Studio Code has been installed."
+
+# Pause for 60 seconds
+Start-Sleep -Seconds 60
+
+# Exit the PowerShell session
+exit

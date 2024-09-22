@@ -38,3 +38,11 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://cho
 
 # Verify Chocolatey installation
 choco -v
+
+Write-Host "Chocolatey has been installed.  You must close this PowerShell session and open a new one to use Chocolatey."
+
+# Pause for 60 seconds
+Start-Sleep -Seconds 60
+
+# Exit the PowerShell session
+exit
