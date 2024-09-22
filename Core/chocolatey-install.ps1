@@ -24,6 +24,8 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/N
 # DOWNLOAD AND INSTALL FROM AN ADMIN POWERSHELL PROMPT
 # powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/chocolatey-install.ps1' -OutFile '$env:TEMP\chocolatey-install.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\chocolatey-install.ps1'"
 
+Clear-Host
+
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
 
@@ -70,5 +72,5 @@ if (Get-Command choco -ErrorAction SilentlyContinue) {
 
     # Exit the PowerShell session
     exit
-    
+
 }

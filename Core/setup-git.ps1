@@ -29,6 +29,8 @@
 # SETUP GIT
 # powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/setup-git.ps1' -OutFile '$env:TEMP\setup-git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\setup-git.ps1'"
 
+Clear-Host
+
 # Check if Git is installed
 $gitPath = Get-Command git -ErrorAction SilentlyContinue
 
@@ -51,6 +53,7 @@ if ($gitPath) {
 } else {
     Write-Host ""
     Write-Host "Git is not installed. Please install Git and try again." -ForegroundColor Red
-    Write-Host "If you have Git installed, ensure that the Git executable is in the system PATH.  A reboot may be required after installing Git." -ForegroundColor Yellow
+    Write-Host "If you have Git installed, ensure that the Git executable is in the system PATH." -ForegroundColor Yellow
+    Write-Host "A reboot may be required after installing Git." -ForegroundColor Yellow
     Write-Host ""
 }
