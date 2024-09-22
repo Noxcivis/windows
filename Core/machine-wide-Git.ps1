@@ -20,11 +20,8 @@ The script performs the following actions:
 - The script uses the latest stable version of Git for Windows.
 
 .EXAMPLE
-powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/machine-wide-Git.ps1' -OutFile '$env:TEMP\machine-wide-Git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-Git.ps1'"
+powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/blob/main/Core/machine-wide-Git.ps1' -OutFile '$env:TEMP\machine-wide-Git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-Git.ps1'"
 #>
-
-# DOWNLOAD AND INSTALL FROM AN ADMIN POWERSHELL PROMPT
-# powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Noxcivis/windows/refs/heads/main/Core/machine-wide-Git.ps1' -OutFile '$env:TEMP\machine-wide-Git.ps1'; powershell -ExecutionPolicy Bypass -File '$env:TEMP\machine-wide-Git.ps1'"
 
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -40,24 +37,33 @@ if (Get-Command "git" -ErrorAction SilentlyContinue) {
     exit
 }
 
-# Define the URL for the Git installer
-$installerUrl = "https://github.com/git-for-windows/git/releases/latest/download/Git-2.41.0-64-bit.exe"
+# Define the Git version and URL for the installer
+$gitVersion = "2.41.0"
+$installerUrl = "https://github.com/git-for-windows/git/releases/latest/download/Git-$gitVersion-64-bit.exe"
 
 # Define the path where the installer will be downloaded
 $installerPath = "$env:TEMP\GitSetup.exe"
 
-# Download the installer
-Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath
+# Download the installer with error handling
+try {
+    Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath -ErrorAction Stop
+    Write-Host "Git installer downloaded successfully." -ForegroundColor Green
+} catch {
+    Write-Host "Failed to download Git installer." -ForegroundColor Red
+    exit
+}
 
-# Install Git for all users
-Start-Process -FilePath $installerPath -ArgumentList "/verysilent", "/allusers" -Wait
+# Install Git for all users with error handling
+try {
+    Start-Process -FilePath $installerPath -ArgumentList "/verysilent", "/allusers" -Wait -ErrorAction Stop
+    Write-Host "Git for Windows has been installed." -ForegroundColor Green
+} catch {
+    Write-Host "Failed to install Git." -ForegroundColor Red
+    exit
+}
 
 # Remove the installer after installation
-Remove-Item -Path $installerPath
-
-Write-Host ""
-Write-Host "Git for Windows has been installed." -ForegroundColor Green
-Write-Host ""
+Remove-Item -Path $installerPath -ErrorAction SilentlyContinue
 
 # Pause for 60 seconds
 Start-Sleep -Seconds 60
