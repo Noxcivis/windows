@@ -5,15 +5,16 @@ This script downloads and installs Visual Studio Code for all users on a Windows
 .DESCRIPTION
 The script performs the following actions:
 1. Checks if the script is running with administrative privileges.
-2. Defines the URL for the Visual Studio Code installer.
-3. Defines the path where the installer will be downloaded.
-4. Downloads the Visual Studio Code installer.
-5. Installs Visual Studio Code for all users silently.
-6. Removes the installer after installation.
+2. Checks if Visual Studio Code is already installed.
+3. Defines the URL for the Visual Studio Code installer.
+4. Defines the path where the installer will be downloaded.
+5. Downloads the Visual Studio Code installer.
+6. Installs Visual Studio Code for all users silently.
+7. Removes the installer after installation.
 
 .NOTES
 - Author : Noxcivis
-- Revision : 1.0
+- Revision : 1.1
 - Source : https://github.com/Noxcivis
 - The script must be run from an elevated PowerShell prompt (Run as Administrator).
 - The script uses the latest stable version of Visual Studio Code.
@@ -28,6 +29,12 @@ powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/N
 # Check if the script is running with administrative privileges
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Warning "You do not have Administrator rights to run this script. Please re-run this script as an Administrator."
+    exit
+}
+
+# Check if Visual Studio Code is already installed
+if (Get-Command "code" -ErrorAction SilentlyContinue) {
+    Write-Host "Visual Studio Code is already installed."
     exit
 }
 
