@@ -55,8 +55,7 @@ if (Get-Command "git" -ErrorAction SilentlyContinue) {
 }
 
 # Define the Git version and URL for the installer
-$gitVersion = "2.41.0"
-$installerUrl = "https://github.com/git-for-windows/git/releases/latest/download/Git-$gitVersion-64-bit.exe"
+$installerUrl = "https://github.com/git-for-windows/git/releases/download/v2.46.1.windows.1/Git-2.46.1-64-bit.exe"
 
 # Define the path where the installer will be downloaded
 $installerPath = "$env:TEMP\GitSetup.exe"
