@@ -34,7 +34,9 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 # Check if Visual Studio Code is already installed
 if (Get-Command "code" -ErrorAction SilentlyContinue) {
+    Write-Host ""
     Write-Host "Visual Studio Code is already installed." -ForegroundColor Green
+    Write-Host ""
     exit
 }
 

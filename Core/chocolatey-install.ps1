@@ -32,7 +32,9 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 # Check if Chocolatey is installed
 if (Get-Command choco -ErrorAction SilentlyContinue) {
+    Write-Host ""
     Write-Host "Chocolatey is already installed." -ForegroundColor Green
+    Write-Host ""
     exit
 } else {
     # Set the execution policy to allow the script to run
