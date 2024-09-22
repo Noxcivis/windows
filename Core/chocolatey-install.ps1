@@ -30,19 +30,23 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
-# Set the execution policy to allow the script to run
-Set-ExecutionPolicy Bypass -Scope Process -Force
+# Check if Chocolatey is installed
+if (Get-Command choco -ErrorAction SilentlyContinue) {
+    Write-Output "Chocolatey is already installed."
+    exit
+} else {
+    # Set the execution policy to allow the script to run
+    Set-ExecutionPolicy Bypass -Scope Process -Force
 
-# Install Chocolatey
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    # Install Chocolatey
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# Verify Chocolatey installation
-choco -v
+    # Verify Chocolatey installation
+    choco -v
 
-Write-Host "Chocolatey has been installed.  You must close this PowerShell session and open a new one to use Chocolatey."
+    # Pause for 60 seconds
+    Start-Sleep -Seconds 60
 
-# Pause for 60 seconds
-Start-Sleep -Seconds 60
-
-# Exit the PowerShell session
-exit
+    # Exit the PowerShell session
+    exit
+}
